@@ -16,9 +16,9 @@ A Ecommerce site  Made with ASP .NET Core , ASP .NET Web API & Angular
 
 
 ## Requirement
-1. Install node js
+1. node js
 2. Visual Studio Code 2019
-3. Install `dotnet ef` global tool using this command `dotnet tool install --global dotnet-ef`
+3. `dotnet ef global tool` if you don't have, using this command to install `dotnet tool install --global dotnet-ef`
 
 ## Installation guide
 1. Download the repositories.
