@@ -1,7 +1,8 @@
 # SmartShop
 A ecommerce site  Made with Asp .Net Core , Asp .NET Web API & Angular
 
-##Installation guide
+
+## Installation guide
 1. Download the repositories.
 2. Open the `SmartShop.DataApi` project in the command prompt & write the below command.
 3. Add  migration for SmartShopDbContext - `dotnet ef migrations add "SS_v0" --project ..\SmartShop.DataLib\SmartShop.DataLib.csproj --startup-project .\SmartShop.DataApi.csproj -c SmartShopDbContext`
