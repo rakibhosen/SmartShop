@@ -1,0 +1,216 @@
+﻿@model ProductViewVM
+@{
+    ViewData["Title"] = "ProductDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container " style="margin-bottom:80px; ">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="col-lg-6">
+                            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                                <div class="carousel-inner">
+                               
+                                        @{int i = 0;}
+                                        @foreach (var img in Model.Product.ProductImages)
+                                        {
+                                            i++;
+                                            var active = i == 1 ? "active" : "";
+                                    <div class=" carousel-item @active">
+                                  
+                                        <img src="http://localhost:5000/Images/@img.ImageName" class="img-fluid w-100" alt="...">
+                                    </div>
+                                        }
+                                    
+
+
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                            <div class="modal-product">
+                                @*<img src="~/assets/img/@Model.ProductImage" class="w-100" style="height:400px;" />*@
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div>
+                                <h2>@Model.Product.ProductName</h2>
+                        
+                            </div>
+
+
+                            @if (Model.Product.ProductSpecs.Count() > 0)
+                            {
+                                <p class="mt-2 mb-2"><strong>Specification of @Model.Product.ProductName</strong> </p>
+                                <div class="row">
+
+                                    @foreach (var sp in Model.Product.ProductSpecs)
+                                    {
+
+
+                                        <div class="col-lg-12 ">
+                                            <p> <span class="text-muted">@sp.Label :</span> @sp.Value</p>
+                                        </div>
+
+                                    }
+                                </div>
+
+                            }
+
+
+
+
+                            @if (Model.Product.ProductPrices.Count() > 0)
+                            {
+                                <p class="mt-2 mb-2"><strong>Price</strong> </p>
+                                <div class="row">
+                                    @foreach (var price in Model.Product.ProductPrices)
+                                    {
+                                     
+
+                                        <div class="col-lg-12 ">
+                                            <p> <span class="text-muted">@price.PropertyValue :</span>@String.Format("{0:0.00}",price.Price)</p>
+                                        </div>
+
+                                    }
+                                </div>
+                                <form method="get" asp-controller="Cart" asp-action="AddToCart" asp-route-Id="@Model.Product.ProductId">
+                                    <input type="hidden" asp-for="ProductId" value="@Model.Product.ProductId"/>
+                                    <div class="row">
+                                        <div class="form-group ck-form-style col-6 mr-auto">
+                                            <label for="pwd"><strong>Select item</strong></label>
+                                            <select asp-for="Price" class="form-control" asp-items="@(new SelectList(@Model.Product.ProductPrices, "Price", "PropertyValue"))" required>
+                                                <option selected="selected" value="">Select one</option>
+                                            </select>
+                                            <span asp-validation-for="Price" class="text-danger" />
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-default btn-dark text-white mt-2" value="Add to cart"/>
+                                </form>
+
+                            }
+
+
+
+
+
+
+
+
+
+                        </div>
+                       
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-12">
+                            <div class="review">
+                                <ul class="nav nav-tabs">
+                                    <li class=" list-group-item "><a class="btn" data-toggle="tab" href="#home">Description</a></li>
+                                    <li class="list-group-item "><a class="btn" data-toggle="tab" href="#review">Reviews</a></li>
+
+
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="home" class="tab-pane fade in active">
+
+                                        <p>@Model.Product.ProductDescription</p>
+                                    </div>
+                                    <div id="review" class="tab-pane fade">
+                                        @if (Model.Product.Reviews.Count > 0)
+                                        {
+
+
+                                            @foreach (var r in Model.Product.Reviews)
+                                            {
+                                                <div class="card mt-2 ">
+                                                    <div class="card-body ">
+                                              
+                                                        <span class="fa fa-star @(
+                                                               Convert.ToInt32( r.Rating )==1 ||
+                                                                         Convert.ToInt32(r.Rating) ==2 ||
+                                                                          Convert.ToInt32(r.Rating) ==3 ||
+                                                                           Convert.ToInt32(r.Rating) ==4 ||
+                                                                           Convert.ToInt32(r.Rating) ==5 ? "checked-star" : ""
+                                                                     
+                                                        )"></span>
+                                                        <span class="fa fa-star           @(
+                                                              
+                                                                         Convert.ToInt32(r.Rating) ==2 ||
+                                                                          Convert.ToInt32(r.Rating) ==3 ||
+                                                                           Convert.ToInt32(r.Rating) ==4 ||
+                                                                           Convert.ToInt32(r.Rating) ==5 ? "checked-star" : ""
+                                                                     
+                                                        )"></span>
+                                                        <span class="fa fa-star           @(
+                                                         
+                                                                          Convert.ToInt32(r.Rating) ==3 ||
+                                                                           Convert.ToInt32(r.Rating) ==4 ||
+                                                                           Convert.ToInt32(r.Rating) ==5 ? "checked-star" : ""
+                                                                     
+                                                        )"></span>
+                                                        <span class="fa fa-star           @(
+                                                        
+                                                                           Convert.ToInt32(r.Rating) ==4 ||
+                                                                           Convert.ToInt32(r.Rating) ==5  ? "checked-star" : ""
+                                                                     
+                                                        )"></span>
+                                                        <span class="fa fa-star
+                                                                        @(
+
+                                                                           Convert.ToInt32(r.Rating) ==5 ? "checked-star" : ""
+                                                                     
+                                                        )"></span>
+
+                                                        <h6 class="text-muted">  @r.Customer.CustomerName</h6>
+
+                                                        <p>@r.Comment</p>
+
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                            }
+
+
+
+
+                                        }
+                                        else
+                                        {
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="text-info">No review</p>
+                                                </div>
+                                            </div>
+
+                                        }
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+      
+</div>
+

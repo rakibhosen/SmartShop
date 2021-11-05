@@ -1,0 +1,61 @@
+<div class="view-container">
+  <!--<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>-->
+  <mat-card class="table-card mat-elevation-z9">
+    <mat-card-header>
+      <mat-card-title>{{product?.productName}}</mat-card-title>
+      <mat-card-subtitle>Product details</mat-card-subtitle>
+      <img src="{{imagePath}}/{{getImageName()}}" mat-card-avatar class="avatar" />
+     
+    </mat-card-header>
+
+    <mat-card-content class="card-container">
+      <div class="f-w product-row">
+        <div *ngIf="product!=null">
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <div class="item-row">
+                <div>Brand</div><div>{{getBrandName(product.brandId)}}</div>
+              </div>
+
+            </mat-list-item>
+
+            <mat-list-item role="listitem">
+              <div class="item-row">
+                <div>Sub-category</div><div>{{getSubcategoryName(product.subcategoryId)}}</div>
+              </div>
+
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <div class="item-row">
+                <div>Brief Decription</div><div>{{product.productDescription}}</div>
+              </div>
+
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <div class="item-row">
+                <div>Price</div><div>{{getPrice()}}</div>
+              </div>
+
+            </mat-list-item>
+            <mat-list-item role="listitem" *ngFor="let sp of product.productSpecs">
+              <div class="item-row">
+                <div>{{sp.label}}</div><div>{{sp.value}}</div>
+              </div>
+
+            </mat-list-item>
+             
+          </mat-list>
+        </div>
+        <div>
+          <div #container [ngStyle]="{width: 300+'px'}" style="height: 510px; text-align:center;margin:0; padding:0;">
+            <ng-image-slider #nav [images]="imageObject" [infinite]="false" [manageImageRatio]=true [autoSlide]="1"
+                             [animationSpeed]="0.1" [imageSize]="{width: container.style.width, space:0}" slideImage="1"></ng-image-slider>
+          </div>
+        </div>
+      </div>
+      <div class="my-1">
+        <a mat-flat-button [routerLink]="['/products']" class="mt-1"><mat-icon>west</mat-icon> Back to product list</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

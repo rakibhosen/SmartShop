@@ -1,0 +1,45 @@
+==============================================================================================
+Step 1 : Open SmartShop.DataApi in the command prompt and follow the instruction below serially
+===============================================================================================
+
+===============================================================================================
+Step 2 : For add Migration copy & paste the below line in command prompt
+===============================================================================================
+
+dotnet ef migrations add "SS_v0" --project ..\SmartShop.DataLib\SmartShop.DataLib.csproj --startup-project .\SmartShop.DataApi.csproj -c SmartShopDbContext
+
+===============================================================================================
+Step 3 : For update migration copy & paste the below line in the command prompt
+===============================================================================================
+
+dotnet ef database update "SS_v0" --project ..\SmartShop.DataLib\SmartShop.DataLib.csproj --startup-project .\SmartShop.DataApi.csproj -c SmartShopDbContext
+
+===============================================================================================
+Step 4 : For update AppDbContext copy & paste below line in the command prompt
+===============================================================================================
+
+dotnet ef database update -c AppDbContext 
+
+===============================================================================================
+Step 5 : Open the SmartShop.Web project in the command prompt and run(5001 port)
+===============================================================================================
+
+dotnet run --urls=http://localhost:5001
+
+===============================================================================================
+Step 6 : Open the SmartShop.DataApi project in the cmd prompt and run
+===============================================================================================
+
+dotnet run
+
+===============================================================================================
+Step 7 : Open the ClientApp from the SmartShop.Client in the command prompt and run 
+===============================================================================================
+
+npm install
+
+===============================================================================================
+Step 8 : run angular server
+===============================================================================================
+
+ng serve -o

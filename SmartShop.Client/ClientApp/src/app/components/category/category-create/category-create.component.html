@@ -1,0 +1,50 @@
+<div class="view-container">
+  <mat-card class="medium-form-card-container mat-elevation-z8">
+    <mat-card-header>
+
+      <mat-card-title>Create Category</mat-card-title>
+      <mat-card-subtitle>Create Category record</mat-card-subtitle>
+      <img src="../../../../assets/category-management-svgrepo-com.svg" mat-card-avatar class="avatar" />
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="medium-form-container">
+
+      <form [formGroup]="categoryForm" (ngSubmit)="save()">
+
+        <mat-form-field class="f-w" appearance="standard">
+          <mat-label>Category Name</mat-label>
+          <input matInput formControlName="categoryName" />
+          <mat-error *ngIf="f.categoryName.touched && f.categoryName.invalid">Category name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <div formArrayName="subcategories">
+          <div class="f-w right"><button mat-button mat-mini-fab  color="primary" (click)="addSubcategory()" type="button"><mat-icon>add</mat-icon></button></div>
+          <mat-form-field class="f-w" *ngFor="let c of subcategories.controls; index as i">
+            <input matInput [formControlName]="i" placeholder="Subcategory name" />
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="removeSubcategory(i)">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="c.touched && c.invalid">Subcategory name is <strong>required</strong></mat-error>
+          </mat-form-field>
+         
+        </div>
+
+        <div class="f-w right my-1">
+          <button class="circle-link" type="reset" mat-raised-button color="accent">Reset</button>
+          &nbsp;
+          <button class="circle-link" type="submit" mat-raised-button color="primary" [disabled]="categoryForm.invalid">Submit</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="medium-form-container">
+      <a mat-flat-button [routerLink]="['/categories']" class="mt-1"><mat-icon>west</mat-icon> back to list</a>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+
+

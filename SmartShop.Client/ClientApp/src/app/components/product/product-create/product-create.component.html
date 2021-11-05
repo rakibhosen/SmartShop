@@ -1,0 +1,179 @@
+<div class="view-container">
+  <mat-card class="medium-form-card-container mat-elevation-z9">
+    <mat-card-header>
+      <mat-card-title>Create new brand</mat-card-title>
+      <mat-card-subtitle>Fill up the form</mat-card-subtitle>
+      <img src="../../../../assets/copy-svgrepo-com.svg" mat-card-avatar class="avatar" />
+      <span class="filler"></span>
+      <button mat-mini-fab *ngIf="productCreated" (click)="addMore()"><mat-icon>read_more</mat-icon></button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="Product info">
+          <form [formGroup]="productForm" class="medium-form-container" (submit)="saveProduct()">
+            <mat-form-field class="f-w" appearance="standard">
+              <mat-label>Product Name</mat-label>
+              <input matInput type="text" formControlName="productName" />
+              <mat-error *ngIf="f.productName.touched && f.productName.errors?.required">Product Name is <strong>required</strong></mat-error>
+              <mat-error *ngIf="f.productName.touched && f.productName.errors?.maxlength">Product Name must be within <strong>50 characters</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field class="f-w" appearance="standard">
+              <mat-label>Brand</mat-label>
+              <mat-select formControlName="brandId">
+                <mat-option value="">None</mat-option>
+                <mat-option *ngFor="let b of brands" [value]="b.brandId">{{b.brandName}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.brandId.touched && f.brandId.errors?.required">Brand is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field class="f-w" appearance="standard">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="categoryId" (selectionChange)="categoryChanged($event)">
+                <mat-option value="">None</mat-option>
+                <mat-option *ngFor="let cat of categories" [value]="cat.categoryId">{{cat.categoryName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="f-w" appearance="standard">
+              <mat-label>Subcategory</mat-label>
+              <mat-select formControlName="subcategoryId">
+                <mat-option value="">None</mat-option>
+                <mat-option *ngFor="let cat of subCategories" [value]="cat.subcategoryId">{{cat.subcategoryName}}</mat-option>
+
+              </mat-select>
+              <mat-error *ngIf="f.subcategoryId.touched && f.subcategoryId.errors?.required">Sub-category is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field class="f-w" appearance="standard">
+              <mat-label>Brief description</mat-label>
+              <textarea matInput formControlName="productDescription" placeholder="Brief marketing text"></textarea>
+              <mat-error *ngIf="f.productDescription.touched && f.productDescription.errors?.required">Sub-category is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <div class="price-row-1">
+              <div class="f-w">
+                <mat-checkbox formControlName="priceControlPropery"
+                              (change)="priceControlProperyChanged($event)" style="margin-right:15px;">
+                  Price with property
+                </mat-checkbox>
+              </div>
+              <mat-form-field class="f-w" appearance="standard">
+                <mat-label>Price Determinig Property</mat-label>
+                <input type="text" matInput [matAutocomplete]="auto" formControlName="priceDeterminingProperty" />
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of propertyNames" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="f.priceDeterminingProperty.errors?.required">Determinig Property is <strong>required</strong></mat-error>
+              </mat-form-field>
+              <div>
+                <button type="button" mat-raised-button (click)="addPrice()" *ngIf="priceChangeWithProperty"><mat-icon>add</mat-icon></button>
+              </div>
+
+            </div>
+            <ng-container formArrayName="prices">
+              <ng-container *ngFor="let p of prices.controls; let i = index">
+                <div [formGroupName]="i" class="price-row">
+                  <mat-form-field class="f-w" appearance="standard">
+                    <mat-label>Property Value</mat-label>
+                    <input matInput
+                           formControlName="propertyValue">
+                    <mat-error *ngIf="prices.controls[i].get('propertyValue')?.errors?.required">Property value is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="f-w" appearance="standard">
+                    <mat-label>Price</mat-label>
+                    <input matInput
+                           formControlName="price">
+                    <mat-error *ngIf="prices.controls[i].get('price')?.errors?.required">Price is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                  <div class="f-w">
+                    <button type="button" mat-icon-button (click)="remove(i)" *ngIf="priceChangeWithProperty"><mat-icon>delete</mat-icon></button>
+                  </div>
+                </div>
+
+              </ng-container>
+              <div class="price-row">
+                <mat-error *ngIf="priceError" class="f-w" style="grid-column-start:span 3">At least one price required</mat-error>
+              </div>
+            </ng-container>
+            <div class="f-w right">
+              <button type="reset" mat-raised-button color="accent" [disabled]="productCreated"><mat-icon style="margin-right:12px">restart_alt</mat-icon>Reset</button>
+              &nbsp;
+              <button type="submit" *ngIf="!productCreated" mat-raised-button color="primary" [disabled]="productForm.invalid || priceError"><mat-icon style="margin-right:12px">save_alt</mat-icon>Create</button>
+              &nbsp;
+              <button type="button" *ngIf="productCreated" mat-raised-button color="primary" (click)="update()" [disabled]="productForm.invalid || priceError"><mat-icon style="margin-right:12px">save_alt</mat-icon>Update</button>
+            </div>
+            <div>
+              <a mat-flat-button [routerLink]="['/products']" class="mt-1"><mat-icon>west</mat-icon> Back to product list</a>
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="Configuration" [disabled]="!productCreated">
+          <form [formGroup]="productConfigForm" class="medium-form-container" (submit)="saveConfig()">
+            <div class="f-w right"><button mat-raised-button (click)="addSpec()" type="button"><mat-icon>add</mat-icon></button></div>
+            <ng-container formArrayName="productSpecs">
+              <ng-container *ngFor="let p of productSpecs.controls; let i = index">
+                <div [formGroupName]="i" class="price-row">
+                  <mat-form-field class="f-w" appearance="standard">
+                    <mat-label>Label</mat-label>
+                    <input matInput [matAutocomplete]="auto"
+                           formControlName="label">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of specLabels" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="productSpecs.controls[i].get('label')?.errors?.required">Property value is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="f-w" appearance="standard">
+                    <mat-label>Value</mat-label>
+                    <input matInput
+                           formControlName="value">
+                    <mat-error *ngIf="productSpecs.controls[i].get('value')?.errors?.required">Price is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                  <div class="f-w">
+                    <button type="button" mat-icon-button *ngIf="productSpecs.controls.length> 1" (click)="removeSpec(i)"><mat-icon>done</mat-icon></button>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+            <div class="f-w right">
+              <button type="reset" mat-raised-button color="accent" ><mat-icon style="margin-right:12px">restart_alt</mat-icon>Reset</button>
+              &nbsp;
+              <button type="submit"  mat-raised-button color="primary" [disabled]="productConfigForm.invalid"><mat-icon style="margin-right:12px">save_alt</mat-icon>Create</button>
+             
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="Images" [disabled]="!productCreated">
+          <form [formGroup]="imagesForm" class="medium-form-container" (submit)="saveImages()" (reset)="resetImages()">
+            <mat-form-field appearance="standard" class="f-w">
+              <ngx-mat-file-input formControlName="images" [multiple]="true" [accept]="'image/*'" color="primary">
+                <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+              </ngx-mat-file-input>
+              <mat-error *ngIf="fimg.images.errors?.required">Image is <strong>required</strong></mat-error>
+            </mat-form-field>
+            
+            <div class="f-w" *ngIf="imagesLen>0">
+              <div class="title">Selected file(s):</div>
+              <div class="value">
+                <ul>
+                  <li *ngFor="let item of files">{{item?.name}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="f-w" *ngIf="isUploading">
+              <mat-progress-bar mode="determinate" [value]="uploadCount"></mat-progress-bar>
+            </div>
+            <div class="f-w right" style="margin-top:30px;">
+              <button type="reset" mat-raised-button color="accent"><mat-icon style="margin-right:12px">restart_alt</mat-icon>Reset</button>
+              &nbsp;
+              <button type="submit" mat-raised-button color="primary" [disabled]="imagesForm.invalid"><mat-icon style="margin-right:12px">save_alt</mat-icon>Save</button>
+
+            </div>
+            <div>
+              <a mat-flat-button [routerLink]="['/products']" class="mt-1"><mat-icon>west</mat-icon> Back to product list</a>
+            </div>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
