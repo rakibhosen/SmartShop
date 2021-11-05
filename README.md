@@ -1,6 +1,24 @@
 # SmartShop
-A ecommerce site  Made with Asp .Net Core , Asp .NET Web API & Angular
+A Ecommerce site  Made with ASP .NET Core , ASP .NET Web API & Angular
 
+### Technologies at glance
+#### Frontend Technologies
+- JavaScript
+- Angular
+- TypeScript
+- SignalR
+
+#### Backend / API Technologies
+- ASP .NET Core Web API
+- ASP .NET Core
+- EntityFrameworkCore
+- SignalR
+
+
+## Requirement
+1. Install node js
+2. Visual Studio Code 2019
+3. Install `dotnet ef` global tool using this command `dotnet tool install --global dotnet-ef`
 
 ## Installation guide
 1. Download the repositories.
