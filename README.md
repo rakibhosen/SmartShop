@@ -32,10 +32,14 @@ A Ecommerce site  Made with ASP .NET Core , ASP .NET Web API & Angular
 
 ### Some picture
 #### Client
-![WhatsApp Image 2021-11-05 at 7 33 28 PM](https://user-images.githubusercontent.com/18288587/140632840-89bc186a-973a-4753-b74e-6c29d25bd9f2.jpeg)
-![WhatsApp Image 2021-11-06 at 12 16 58 PM](https://user-images.githubusercontent.com/18288587/140632912-fab4e04e-b5d8-422e-8429-73b18cda828a.jpeg)
-![WhatsApp Image 2021-11-05 at 7 33 28 PM (4)](https://user-images.githubusercontent.com/18288587/140632919-bd7a1998-ce22-43c5-bf7a-062ce8265b98.jpeg)
-![WhatsApp Image 2021-11-06 at 12 16 59 PM](https://user-images.githubusercontent.com/18288587/140632926-c7eec859-a67d-4ed0-b8dc-f764717be5d7.jpeg)
+![screencapture-localhost-5001-2021-11-12-21_25_58](https://user-images.githubusercontent.com/18288587/141492536-17b0263a-873b-41e8-b2ed-1b8b2a4d4124.png)
+![screencapture-localhost-5001-Product-ProductDetails-1-2021-11-12-21_28_22](https://user-images.githubusercontent.com/18288587/141507410-d1042d31-c6e0-4613-9b79-ccb30d2ff96d.png)
+![screencapture-localhost-5001-Cart-2021-11-12-20_52_15](https://user-images.githubusercontent.com/18288587/141507528-103ebcf4-2475-4637-9079-71c367c9ae11.png)
+
+![screencapture-localhost-5001-Checkout-2021-11-12-21_29_17](https://user-images.githubusercontent.com/18288587/141507573-d7b67581-849d-44dc-94a4-76ed733d510a.png)
+![screencapture-localhost-5001-User-2021-11-12-21_31_35](https://user-images.githubusercontent.com/18288587/141507603-caad1d99-8c20-4026-8b0b-70a089b9ff33.png)
+
+![screencapture-localhost-5001-User-2021-11-12-21_31_55](https://user-images.githubusercontent.com/18288587/141507624-ffa4a5fc-df13-47eb-8176-0e89b1f2bf06.png)
 
 #### Admin
 
