@@ -8,7 +8,7 @@ A Ecommerce site  Made with ASP .NET Core , ASP .NET Web API & Angular
 - TypeScript
 - SignalR
 
-#### Backend / API Technologies
+#### Backend Technologies
 - ASP .NET Core Web API
 - ASP .NET Core
 - EntityFrameworkCore
