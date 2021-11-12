@@ -21,4 +21,3 @@ D:\FinalProject\SmartShop\SmartShop.DataLib\obj\Debug\netcoreapp3.1\SmartShop.Da
 D:\FinalProject\SmartShop\SmartShop.DataLib\obj\Debug\netcoreapp3.1\SmartShop.DataLib.dll
 D:\FinalProject\SmartShop\SmartShop.DataLib\obj\Debug\netcoreapp3.1\SmartShop.DataLib.pdb
 D:\FinalProject\SmartShop\SmartShop.DataLib\obj\Debug\netcoreapp3.1\SmartShop.DataLib.genruntimeconfig.cache
-D:\FinalProject\SmartShop\SmartShop.DataLib\obj\Debug\netcoreapp3.1\SmartShop.DataLib.csprojAssemblyReference.cache

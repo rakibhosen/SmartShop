@@ -9196,6 +9196,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "D:\\FinalProject\\SmartShop\\SmartShop.DataLib\\SmartShop.DataLib.csproj": {
               "projectPath": "D:\\FinalProject\\SmartShop\\SmartShop.DataLib\\SmartShop.DataLib.csproj"
@@ -9211,6 +9212,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Castle.Windsor": {
             "target": "Package",
@@ -9271,7 +9273,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.412\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
