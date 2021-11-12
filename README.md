@@ -21,7 +21,7 @@ A Ecommerce site  Made with ASP .NET Core , ASP .NET Web API & Angular
 3. `dotnet ef global tool` if you don't have, using this command to install `dotnet tool install --global dotnet-ef`
 
 ## Installation guide
-1. Download the repositories.
+1. Download the repository.
 2. Open the `SmartShop.DataApi` project in the command prompt & write the below command.
 3. Add  migration for SmartShopDbContext - `dotnet ef migrations add "SS_v0" --project ..\SmartShop.DataLib\SmartShop.DataLib.csproj --startup-project .\SmartShop.DataApi.csproj -c SmartShopDbContext`
 4. Update migration for SmartShopDbContext - `dotnet ef database update "SS_v0" --project ..\SmartShop.DataLib\SmartShop.DataLib.csproj --startup-project .\SmartShop.DataApi.csproj -c SmartShopDbContext`
